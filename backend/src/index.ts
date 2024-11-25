@@ -16,6 +16,11 @@ let allSockets: User[] = [];
 
 const generateRoomId = () => uuidv4();
 
+//preview when the server is hosted
+app.get('/', (req,res)=>{
+  res.send("Hello Server is hosted")
+})
+
 app.use(cors({
     origin: "http://localhost:5173",
     methods: ["POST"],
