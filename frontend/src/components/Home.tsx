@@ -11,13 +11,17 @@ const Home = () => {
 
   const getRoomId = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/create-room");
+      const response = await axios.post("https://gosipy-server.vercel.app/create-room");
       if (response.data) {
         setRoomId(response.data.roomId);
         setError(null);
       }
     } catch (err) {
-      setError(err.message);
+        if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError("An unknown error occurred.");
+          }
     }
   };
 
