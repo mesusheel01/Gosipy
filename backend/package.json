@@ -3,10 +3,9 @@
     "version": "1.0.0",
     "description": "Gosipy backend",
     "scripts": {
-        "start": "npx nodemon src/index.ts",
-        "dev": "tsc -b && vercel dev",
-        "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../frontend && npm run build && @powershell Copy-Item -Recurse dist ../backend",
-        "lint": "eslint ."
+        "test": "echo \"Error: no test specified\" && ecit 1",
+        "stage": "tsc && git status && git add .",
+        "dev": "tsc -b && vercel dev"
     },
     "dependencies": {
         "@types/cors": "^2.8.17",

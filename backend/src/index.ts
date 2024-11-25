@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-const PORT = 3000;
+const PORT = 5000;
 const WSPORT = 8000;
 
 interface User {
@@ -18,6 +18,8 @@ let allSockets: User[] = [];
 const generateRoomId = () => uuidv4();
 
 // Middleware
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(cors({
   origin: "http://localhost:5173",
   methods: ["POST", "GET"],

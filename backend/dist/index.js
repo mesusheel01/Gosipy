@@ -8,11 +8,13 @@ const uuid_1 = require("uuid");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const PORT = 3000;
+const PORT = 5000;
 const WSPORT = 8000;
 let allSockets = [];
 const generateRoomId = () => (0, uuid_1.v4)();
 // Middleware
+app.use(express_1.default.json());
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
     origin: "http://localhost:5173",
     methods: ["POST", "GET"],
