@@ -10,7 +10,7 @@ const Room = () => {
   const [roomId] = useRecoilState(roomIdAtom);
 
   useEffect(() => {
-    const ws = new WebSocket("https://gosipy-server.vercel.app/");
+    const ws = new WebSocket("https://gosipy.onrender.com/");
     setSocket(ws);
     ws.onopen = () => {
       ws.send(JSON.stringify({ type: "join", payload: { roomId, name: userName } }));

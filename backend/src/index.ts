@@ -2,10 +2,12 @@ import { WebSocketServer, WebSocket } from "ws";
 import { v4 as uuidv4 } from "uuid";
 import express from "express";
 import cors from "cors";
+import http from 'http'
 
 const app = express();
 const PORT = 5000;
-const WSPORT = 8000;
+
+const server = http.createServer(app)
 
 interface User {
   socket: WebSocket;
@@ -42,7 +44,7 @@ app.listen(PORT, () => {
 });
 
 // Start WebSocket server
-const wss = new WebSocketServer({ port: WSPORT });
+const wss = new WebSocketServer({ server });
 
 wss.on("connection", (socket) => {
   console.log("Client connected");
