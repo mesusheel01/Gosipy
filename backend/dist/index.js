@@ -8,18 +8,30 @@ const uuid_1 = require("uuid");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-const wss = new ws_1.WebSocketServer({ port: 8000 });
+const PORT = 3000;
+const WSPORT = 8000;
 let allSockets = [];
 const generateRoomId = () => (0, uuid_1.v4)();
+// Middleware
 app.use((0, cors_1.default)({
     origin: "http://localhost:5173",
-    methods: ["POST"],
+    methods: ["POST", "GET"],
     credentials: true
 }));
+// Routes
+app.get('/', (req, res) => {
+    res.send("Hello Server is hosted");
+});
 app.post("/create-room", (req, res) => {
     const roomId = generateRoomId();
     res.json({ roomId });
 });
+// Start Express server
+app.listen(PORT, () => {
+    console.log(`Express server running on http://localhost:${PORT}`);
+});
+// Start WebSocket server
+const wss = new ws_1.WebSocketServer({ port: WSPORT });
 wss.on("connection", (socket) => {
     console.log("Client connected");
     socket.on("message", (message) => {
@@ -55,7 +67,4 @@ wss.on("connection", (socket) => {
         console.log("Client disconnected");
         allSockets = allSockets.filter((user) => user.socket !== socket);
     });
-});
-app.listen(3000, () => {
-    console.log("Express server running on http://localhost:3000");
 });

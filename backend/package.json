@@ -1,22 +1,23 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "tsc -b && node ./dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/ws": "^8.5.13",
-    "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "uuid": "^11.0.3",
-    "ws": "^8.18.0"
-  }
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "Gosipy backend",
+    "scripts": {
+        "start": "npx nodemon src/index.ts",
+        "dev": "tsc -b && vercel dev",
+        "build:ui": "@powershell Remove-Item -Recurse -Force dist && cd ../frontend && npm run build && @powershell Copy-Item -Recurse dist ../backend",
+        "lint": "eslint ."
+    },
+    "dependencies": {
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.0",
+        "@types/ws": "^8.5.13",
+        "@vercel/node": "^3.2.26",
+        "cors": "^2.8.5",
+        "express": "^4.21.1",
+        "nodemon": "^3.1.7",
+        "uuid": "^11.0.3",
+        "vercel": "^39.1.1",
+        "ws": "^8.18.0"
+    }
 }
