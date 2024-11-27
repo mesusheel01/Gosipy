@@ -7,9 +7,10 @@ const ws_1 = require("ws");
 const uuid_1 = require("uuid");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const http_1 = __importDefault(require("http"));
 const app = (0, express_1.default)();
 const PORT = 5000;
-const WSPORT = 8000;
+const server = http_1.default.createServer(app);
 let allSockets = [];
 const generateRoomId = () => (0, uuid_1.v4)();
 // Middleware
@@ -33,7 +34,7 @@ app.listen(PORT, () => {
     console.log(`Express server running on http://localhost:${PORT}`);
 });
 // Start WebSocket server
-const wss = new ws_1.WebSocketServer({ port: WSPORT });
+const wss = new ws_1.WebSocketServer({ server });
 wss.on("connection", (socket) => {
     console.log("Client connected");
     socket.on("message", (message) => {
