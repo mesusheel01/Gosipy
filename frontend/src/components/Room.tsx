@@ -10,7 +10,7 @@ const Room = () => {
   const [roomId] = useRecoilState(roomIdAtom);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:5000/");
+    const ws = new WebSocket("ws://localhost:8080/");
     setSocket(ws);
     ws.onopen = () => {
       ws.send(JSON.stringify({ type: "join", payload: { roomId, name: userName } }));

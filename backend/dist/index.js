@@ -7,17 +7,15 @@ const ws_1 = require("ws");
 const uuid_1 = require("uuid");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const http_1 = __importDefault(require("http"));
 const app = (0, express_1.default)();
 const PORT = 5000;
-const server = http_1.default.createServer(app);
 let allSockets = [];
 const generateRoomId = () => (0, uuid_1.v4)();
 // Middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)({
-    origin: "http://localhost:5173",
+    origin: ["https://gosipy.vercel.app", "http://localhost:5173"],
     methods: ["POST", "GET"],
     credentials: true
 }));
@@ -33,8 +31,7 @@ app.post("/create-room", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Express server running on http://localhost:${PORT}`);
 });
-// Start WebSocket server
-const wss = new ws_1.WebSocketServer({ server });
+const wss = new ws_1.WebSocketServer({ port: 8080 });
 wss.on("connection", (socket) => {
     console.log("Client connected");
     socket.on("message", (message) => {
