@@ -42,7 +42,14 @@ const Home = () => {
   };
 
   return (
-    <div className="h-screen font-mono flex items-center justify-center bg-gray-950">
+    <div className="h-screen font-mono flex flex-col items-center justify-center gap-10 bg-gray-950">
+       <p className="text-md md:text-xl lg:text-2xl mb-20 text-pink-400
+  overflow-hidden whitespace-nowrap border-r-4 border-pink-400
+  animate-typewriterSm sm:animate-typewriterSm md:animate-typewriterMd lg:animate-typewriterLg">
+  A platform where you can gossip with your friends!
+</p>
+
+
       <div className="w-full max-w-md flex flex-col items-center p-8 rounded-3xl bg-gray-900 shadow-lg">
         <div className="w-full flex flex-col gap-4 items-center mb-6">
           <input
