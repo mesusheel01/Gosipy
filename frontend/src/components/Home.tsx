@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div className="h-screen font-mono flex flex-col items-center justify-center gap-10 bg-gray-950">
-       <p className="text-md md:text-xl lg:text-2xl mb-20 text-pink-400
+       <p className="text-md md:text-xl lg:text-2xl mb-20 text-pink-400 m-2
   overflow-hidden whitespace-nowrap border-r-4 border-pink-400
   animate-typewriter sm:animate-typewriterSm md:animate-typewriterMd lg:animate-typewriterLg">
   A platform where you can gossip with your friends!

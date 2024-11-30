@@ -1,11 +1,4 @@
 import { WebSocketServer, WebSocket } from "ws";
-import { v4 as uuidv4 } from "uuid";
-import express from "express";
-import cors from "cors";
-
-const app = express();
-const PORT = 5000;
-
 
 interface User {
   socket: WebSocket;
@@ -15,34 +8,7 @@ interface User {
 
 let allSockets: User[] = [];
 
-const generateRoomId = () => uuidv4();
-
-// Middleware
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-app.use(cors({
-    origin: ["https://gosipy.vercel.app", "http://localhost:5173"],
-    methods: ["POST", "GET"],
-    credentials: true
-  }));
-
-// Routes
-app.get('/', (req, res) => {
-  res.send("Hello Server is hosted");
-});
-
-app.post("/create-room", (req, res) => {
-  const roomId = generateRoomId();
-  res.json({ roomId });
-});
-
-// Start Express server
-app.listen(PORT, () => {
-  console.log(`Express server running on http://localhost:${PORT}`);
-});
-
-
-const wss = new WebSocketServer({ port:8080 });
+const wss = new WebSocketServer({ port: 8080 });
 
 wss.on("connection", (socket) => {
   console.log("Client connected");
@@ -50,12 +16,13 @@ wss.on("connection", (socket) => {
   socket.on("message", (message) => {
     try {
       const parsedMessage = JSON.parse(message.toString());
+
       if (parsedMessage.type === "join") {
         const { roomId, name } = parsedMessage.payload;
         allSockets.push({ socket, room: roomId, name });
         console.log(`${name} joined room: ${roomId}`);
       } else if (parsedMessage.type === "chat") {
-        const currentUser = allSockets.find((x) => x.socket === socket);
+        const currentUser = allSockets.find((user) => user.socket === socket);
         if (currentUser) {
           const { room, name } = currentUser;
           const timestamp = new Date().toISOString();
@@ -63,13 +30,15 @@ wss.on("connection", (socket) => {
           allSockets
             .filter((user) => user.room === room)
             .forEach((user) => {
-              user.socket.send(
-                JSON.stringify({
-                  text: parsedMessage.payload.message,
-                  sender: name,
-                  timestamp,
-                })
-              );
+              if (user.socket !== socket) {
+                user.socket.send(
+                  JSON.stringify({
+                    text: parsedMessage.payload.message,
+                    sender: name,
+                    timestamp,
+                  })
+                );
+              }
             });
         }
       }
