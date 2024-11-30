@@ -3,7 +3,6 @@ import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
 
 const app = express();
-const PORT = 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
