@@ -8,6 +8,11 @@ export default {
     theme: {
       extend: {
         keyframes: {
+
+          typewriter: {
+            '0%': { width: '0%' },
+            '100%': { width: '100%' },
+          },
           typewriterSm: {
             '0%': { width: '0%' },
             '100%': { width: '70%' },
@@ -26,6 +31,7 @@ export default {
           },
         },
         animation: {
+          typewriter: 'typewriterSm 5s steps(50, end), blink 1s step-end infinite',
           typewriterSm: 'typewriterSm 5s steps(50, end), blink 1s step-end infinite',
           typewriterMd: 'typewriterMd 5s steps(50, end), blink 1s step-end infinite',
           typewriterLg: 'typewriterLg 5s steps(50, end), blink 1s step-end infinite',
