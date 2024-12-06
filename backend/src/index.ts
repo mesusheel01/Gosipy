@@ -1,5 +1,6 @@
 import { WebSocketServer, WebSocket } from "ws";
 
+const port =  8080
 interface User {
   socket: WebSocket;
   room: string;
@@ -8,7 +9,7 @@ interface User {
 
 let allSockets: User[] = [];
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ port });
 
 wss.on("connection", (socket) => {
   console.log("Client connected");

@@ -11,7 +11,7 @@ const Home = () => {
 
   const getRoomId = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/create-room");
+      const response = await axios.post("https://gosipy-express-server.onrender.com/create-room");
       if (response.data) {
         setRoomId(response.data.roomId);
         setError(null);
