@@ -4,7 +4,7 @@
 
 **Home page and Room connection page UI**
 - Home page
-- ![alt text](image.png)
+- ![alt text](image-2.png)
 - Room page
 - ![alt text](image-1.png)
 
