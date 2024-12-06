@@ -23,4 +23,6 @@ app.post("/create-room", (req, res) => {
     const roomId = generateRoomId();
     res.json({ roomId });
 });
-exports.default = app;
+app.listen(PORT, () => {
+    console.log(`Server is hosted on http://localhost:${PORT}`);
+});

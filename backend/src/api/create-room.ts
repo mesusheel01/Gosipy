@@ -3,6 +3,7 @@ import cors from "cors";
 import { v4 as uuidv4 } from "uuid";
 
 const app = express();
+const PORT= 5000
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,4 +24,7 @@ app.post("/create-room", (req, res) => {
   res.json({ roomId });
 });
 
-export default app;
+
+app.listen(PORT, ()=>{
+    console.log(`Server is hosted on http://localhost:${PORT}`)
+})

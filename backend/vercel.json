@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "dist/api/**/*.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/create-room",
+        "dest": "dist/api/index.js"
+      },
+      {
+        "src": "/",
+        "dest": "dist/api/index.js"
+      }
+    ]
+  }

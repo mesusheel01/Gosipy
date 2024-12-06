@@ -21,13 +21,11 @@ wss.on("connection", (socket) => {
                     allSockets
                         .filter((user) => user.room === room)
                         .forEach((user) => {
-                        if (user.socket !== socket) {
-                            user.socket.send(JSON.stringify({
-                                text: parsedMessage.payload.message,
-                                sender: name,
-                                timestamp,
-                            }));
-                        }
+                        user.socket.send(JSON.stringify({
+                            text: parsedMessage.payload.message,
+                            sender: name,
+                            timestamp,
+                        }));
                     });
                 }
             }
