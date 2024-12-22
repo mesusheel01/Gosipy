@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   res.send("Hello, server is hosted!");
 });
 
-app.post("/create-room", (req, res) => {
+app.get("/create-room", (req, res) => {
   const roomId = generateRoomId();
   res.json({ roomId });
 });
